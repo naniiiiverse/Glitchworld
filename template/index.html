@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>404.glitchworld</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- noise overlay, sits above everything -->
+<div class="noise-overlay"></div>
+
+<!-- ============ LOADING SCREEN ============ -->
+<section id="loading-screen" class="screen active">
+  <div class="vortex">
+    <div class="vortex-ring r1"></div>
+    <div class="vortex-ring r2"></div>
+    <div class="vortex-ring r3"></div>
+    <div class="vortex-ring r4"></div>
+    <div class="vortex-core"></div>
+  </div>
+  <p class="loading-text" id="loading-text">ENTERING_GLITCHWORLD<span class="dots"></span></p>
+</section>
+
+<!-- ============ PORTAL SELECT SCREEN ============ -->
+<section id="portal-screen" class="screen">
+  <header class="portal-header">
+    <h1 class="glitch-title" data-text="404.glitchworld">404.glitchworld</h1>
+    <p class="portal-sub">/ select a fragment of reality that shouldn't exist /</p>
+  </header>
+
+  <div class="portal-grid">
+    <button class="portal-card" data-feature="newspaper">
+      <span class="portal-icon">🗞️</span>
+      <span class="portal-name">The Parallel Gazette</span>
+      <span class="portal-status">[LOADING TIMELINE...]</span>
+      <span class="portal-glitch-bar"></span>
+    </button>
+
+    <button class="portal-card" data-feature="wiki">
+      <span class="portal-icon">📖</span>
+      <span class="portal-name">FakePedia</span>
+      <span class="portal-status">[404 NOT FOUND]</span>
+      <span class="portal-glitch-bar"></span>
+    </button>
+
+    <button class="portal-card" data-feature="auction">
+      <span class="portal-icon">💭</span>
+      <span class="portal-name">BidYourWord</span>
+      <span class="portal-status">[UNKNOWN BIDDER ONLINE]</span>
+      <span class="portal-glitch-bar"></span>
+    </button>
+
+    <button class="portal-card" data-feature="archive">
+      <span class="portal-icon">🗂️</span>
+      <span class="portal-name">HighArchives</span>
+      <span class="portal-status">[CLASSIFIED]</span>
+      <span class="portal-glitch-bar"></span>
+    </button>
+  </div>
+</section>
+
+<!-- ============ APP SCREEN (shared shell for all 4 features) ============ -->
+<section id="app-screen" class="screen">
+  <nav class="escape-nav" id="escape-nav">
+    <span class="logo-404">🌀 404</span>
+    <span class="esc-text">[ ESC REALITY ]</span>
+  </nav>
+
+  <!-- static/glitch transition overlay for back navigation -->
+  <div id="static-overlay"></div>
+
+  <!-- ---- NEWSPAPER VIEW ---- -->
+  <div class="feature-view" id="view-newspaper">
+    <div class="paper-stack-intro" id="paper-stack-intro">
+      <div class="stack-paper sp1"></div>
+      <div class="stack-paper sp2"></div>
+      <div class="stack-paper sp3"></div>
+      <div class="stack-paper sp4"></div>
+      <div class="stack-paper sp5"></div>
+    </div>
+
+    <div class="newspaper-wrap" id="newspaper-wrap">
+      <div class="newspaper-page" id="newspaper-page">
+        <div class="curl-layer" id="curl-layer"></div>
+        <div class="newspaper-inner" id="newspaper-content">
+          <!-- filled by JS -->
+        </div>
+        <p class="paper-hint">hold anywhere to turn the page</p>
+      </div>
+      <div class="newspaper-page next" id="newspaper-page-next">
+        <div class="newspaper-inner" id="newspaper-content-next"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---- FAKEPEDIA VIEW ---- -->
+  <div class="feature-view" id="view-wiki">
+    <div class="wiki-morph-intro" id="wiki-morph-intro">
+      <span class="morph-title" id="morph-title">Loading_Article</span>
+    </div>
+    <div class="wiki-page" id="wiki-page">
+      <!-- filled by JS -->
+    </div>
+  </div>
+
+  <!-- ---- BIDYOURWORD VIEW ---- -->
+  <div class="feature-view" id="view-auction">
+    <div class="auction-intro" id="auction-intro">
+      <div class="bubble">💭</div>
+      <div class="bid-scramble" id="bid-scramble"></div>
+      <div class="hammer">🔨</div>
+    </div>
+    <div class="auction-page" id="auction-page">
+      <header class="auction-head">
+        <h2>BidYourWord</h2>
+        <div class="glitchz-balance">⟁ <span id="glitchz-amount">500</span> Glitchz</div>
+      </header>
+      <form class="new-thought-form" id="new-thought-form">
+        <input type="text" id="new-thought-input" maxlength="160" placeholder="enter a thought to put up for auction..." autocomplete="off">
+        <button type="submit">submit</button>
+      </form>
+      <div class="thought-list" id="thought-list">
+        <!-- filled by JS -->
+      </div>
+      <p class="auction-note">bid results lock in every hour, on the hour</p>
+    </div>
+  </div>
+
+  <!-- ---- HIGHARCHIVES VIEW ---- -->
+  <div class="feature-view" id="view-archive">
+    <div class="terminal-intro" id="terminal-intro">
+      <pre id="terminal-text"></pre>
+    </div>
+    <div class="archive-page" id="archive-page">
+      <!-- filled by JS -->
+    </div>
+  </div>
+
+</section>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
