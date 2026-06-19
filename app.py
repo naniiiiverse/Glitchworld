@@ -35,7 +35,7 @@ init_db()
 # ── Groq helper ───────────────────────────────────────────
 def ask_groq(system, prompt):
     r = client.chat.completions.create(
-        model="llama3-8b-8192",
+        model="llama-3.3-70b-versatile",
         messages=[{"role": "system", "content": system},
                   {"role": "user", "content": prompt}],
         max_tokens=900,
@@ -54,6 +54,12 @@ def safe_json(text):
     return json.loads(text)
 
 # ── Routes ────────────────────────────────────────────────
+@app.after_request
+def add_no_cache_headers(response):
+    response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
+    response.headers['Pragma'] = 'no-cache'
+    return response
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -78,6 +84,7 @@ def newspaper():
         )
         return jsonify(safe_json(result))
     except Exception as e:
+        app.logger.error(f"AI route failed: {e}")
         return jsonify({"error": str(e)}), 500
 
 @app.route('/api/wiki')
@@ -104,6 +111,7 @@ def wiki():
         )
         return jsonify(safe_json(result))
     except Exception as e:
+        app.logger.error(f"AI route failed: {e}")
         return jsonify({"error": str(e)}), 500
 
 @app.route('/api/archive')
@@ -125,6 +133,7 @@ def archive():
         )
         return jsonify(safe_json(result))
     except Exception as e:
+        app.logger.error(f"AI route failed: {e}")
         return jsonify({"error": str(e)}), 500
 
 @app.route('/api/thoughts')
@@ -164,3 +173,4 @@ def bid_thought():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+    
